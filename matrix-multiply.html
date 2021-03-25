@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="matrix-multiply.js"></script>
+    <link rel="stylesheet" href="matrix-multiply.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Matrix Multiplication Calculator</title>
 </head>
 <body>
     
+    <div>
+        <h1>Matrix Multiplication Calculator</h1>
+        This is a calculator for multiplying two matrices together. <br>
+        Please enter in the dimensions of the matrices. <br>
+        (The number of columns of m1 must match the number of rows in m2.)
+        <br></br>
+    </div>
+    <div>
+        Matrix 1: <br/>
+        row = <input id="m1-row"></input> <br/>
+        col  = <input id="m1-col"></input> <br></br>
+        Matrix 2: <br/>
+        row = <input id="m2-row"></input> <br/>
+        col  = <input id="m2-col"></input> <br></br>
+        <button onclick="get_input()">Submit</button>
+        <p id="demo1"></p><p id="demo2"></p><p id="demo3"></p><p id="demo4"></p>
+        <p id="demo5"></p><p id="demo6"></p>
+    </div>
+
 </body>
 </html>
