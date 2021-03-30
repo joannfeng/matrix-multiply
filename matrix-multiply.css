@@ -2,3 +2,12 @@ body {
     text-align: center;
     justify-content: center;
 }
+
+table, th, td {
+    justify-content: center;
+    width: 100px;
+    border: 1px solid black;
+    margin-left: auto; 
+    margin-right: auto;
+    border-spacing: 0 0px;
+}
