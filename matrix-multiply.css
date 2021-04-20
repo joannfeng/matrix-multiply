@@ -3,6 +3,17 @@ body {
     justify-content: center;
 }
 
+form {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+    justify-content: center;
+}
+
 table, th, td {
     justify-content: center;
     width: 100px;
@@ -10,4 +21,18 @@ table, th, td {
     margin-left: auto; 
     margin-right: auto;
     border-spacing: 0 0px;
+}
+  
+input {
+    width: 50px;
+    height: 20px;
+    border: 1px solid black;
+    justify-content: center;
+}
+
+form input {
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    justify-content: center;
 }
