@@ -17,15 +17,43 @@ function get_input() {
     isValid(m1col.value, m2row.value, "demo5");
 
     // make each matrix
-    tableCreate(m1row.value, m1col.value);
-    tableCreate(m2row.value, m2col.value);
+    document.getElementById("mat1").innerHTML = "hello there general kenobi";
+    document.getElementById("mat1").innerHTML = "<form id=\"mat1\">";
+    for (var i = 0; i < m1row.value; i++) {
+        for(var j = 0; j < m1col.value; j++) { 
+            document.getElementById("mat1").innerHTML = "<input type=\"text\" id=\"1[\" + i + \",\" + j + \"]\" name=\"[\" + i + \",\" + j + \"]\">";
+        }
+        document.getElementById("mat1").innerHTML = "<br><br>"
+    } 
+    document.getElementById("mat1").innerHTML = "<input type=\"submit\" value=\"Submit\">";
+    document.getElementById("mat1").innerHTML = "</form>";
+
+    document.getElementById("mat2").innerHTML = "<form id=\"mat2\">";
+    for (var i = 0; i < m2row.value; i++) {
+        for(var j = 0; j < m2col.value; j++) {
+            document.getElementById("mat2").innerHTML = "<input type=\"text\" id=\"2[\" + i + \",\" + j + \"]\" name=\"[\" + i + \",\" + j + \"]\">"; 
+        }
+        document.getElementById("mat2").innerHTML = "<br><br>"
+    } 
+    document.getElementById("mat2").innerHTML = "<input type=\"submit\" value=\"Submit\">";
+    document.getElementById("mat2").innerHTML = "</form>";
+
+    /*
+    tableCreate(m1row.value, m1col.value, "mat1");
+    tableCreate(m2row.value, m2col.value, "mat2");
+
+    document.getElementById("matrices").innerHTML = 
+        "<button onclick=\"getMatValues(" + mat1 + ")\">Submit Matrix</button>";
+
+    var mat1 = getMatValues("mat1");
+    var mat2 = getMatValues("mat2");
+
+    document.getElementById("matrices").innerHTML = "mat1";
+    document.getElementById("matrices").innerHTML = "mat2";
+    */
 }
 
 function isInt(x, id) {
-    /*if (Number.isInteger(parseInt(x)))
-        document.getElementById(id).innerHTML = x;
-    else
-        document.getElementById(id).innerHTML = "not an int";*/
     if (!Number.isInteger(parseInt(x)))
         document.getElementById(id).innerHTML = "not an int";
 }
@@ -41,13 +69,14 @@ function isValid(m1col, m2row, id) {
     }
 }
 
-// next time, try to display inputs in the shape of the matrix
-function tableCreate(rows, columns) {
+function tableCreate(rows, columns, id) {
     var body = document.body,
         tbl  = document.createElement('table');
         tbl.style.width  = '100px';
         tbl.style.border = '1px solid black';
         tbl.style.justifySelf = 'center';
+        tbl.id = id;
+        tbl.class = "here";
 
     for (var i = 0; i < rows; i++) {
         var tr = tbl.insertRow();
@@ -55,12 +84,28 @@ function tableCreate(rows, columns) {
             var td = tr.insertCell();
             var input = document.createElement("input");
             input.type = "number";
-            input.id = "matrix [" + i + "," + j + "]";
+            input.id = "mat [" + i + "," + j + "]";
             td.appendChild(input);
         }
     }
     
     body.appendChild(tbl);
     body.appendChild(document.createTextNode( '\u00A0' )); // create blank space
-    document.getElementById("matrix").innerHTML = "<button onclick=\"get_input()\">Submit</button>";
+}
+
+function getMatValues(id) {
+    document.getElementById("matrices").innerHTML = "hewwo";
+    /*var data = []; 
+    var table = document.getElementById(id); 
+    var input = table.getElementsByTagName('input'); 
+    for (var z = 0; z < input.length; z++) { 
+        data.push(input[z].id);
+    }
+    return data;*/
+
+    var a=[];
+    $('input:text').each(function(){
+        a.push($(this).attr('name'))
+    })
+    console.log(a)
 }
