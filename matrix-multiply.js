@@ -1,3 +1,5 @@
+var FLAG = 1;
+
 // type in # of rows and columns
 // (# of columns of m1 --> # of rows of m2), lock
 // perform mm and display result on html page
@@ -16,7 +18,10 @@ function get_input() {
     // # of columns of m1 --> # of rows of m2 (must match)
     isValid(m1col.value, m2row.value, "demo5");
 
-    createForm_S();
+    if(FLAG == 1) {
+        createForm_S();
+        FLAG = 0;
+    }
 }
 
 function isInt(x, id) {
@@ -129,6 +134,8 @@ function tableCreate_S(rows, columns, matNum) {
     tbl.style.width  = '100px';
     tbl.style.border = '1px solid black';
     tbl.style.justifySelf = 'center';
+    tbl.style.padding = '100px';
+    tbl.class = 'column';
 
     for (var i = 0; i < rows; i++) {
         var tr = tbl.insertRow();
@@ -151,6 +158,8 @@ function createForm_S() {
     form = document.createElement('form') // create a form <form> ... </form>
     form.id = "two_matrix";
     var dim = getRowCol(); // I'm getting the dimensions of the two matrices
+    span = document.createElement('span')
+    span.id = "span";
     var mat1 = tableCreate_S(dim.row1, dim.col1, 1); // Creating <table>...</table> elements for both matrices
     var mat2 = tableCreate_S(dim.row2, dim.col2, 2);
     
@@ -160,8 +169,11 @@ function createForm_S() {
     submit.onclick = getFormOutput_S; // the reason why I don't put getFormOutput_S() is because the parentheses tells the program to actually run the function when I just need to pass the function itself.
     //submit.onclick = matrix_multiply(mat1, mat2);
 
-    form.appendChild(mat1); // appends everything. Think of it kind of like a tree ...
-    form.appendChild(mat2);
+    span.appendChild(mat1);
+    span.appendChild(mat2);
+    //form.appendChild(mat1); // appends everything. Think of it kind of like a tree ...
+    //form.appendChild(mat2);
+    form.appendChild(span);
     form.appendChild(submit);
     body.append(form);
 }
@@ -188,26 +200,30 @@ function getFormOutput_S(){
 function matrix_multiply(inputs)
 {
     var sus = getRowCol();
-    var i = 0;
-    var j = 0;
-    var k = 0;
-    for (i; i < sus.row1; i++) {
-        for (j; j < sus.col2; j++) {
-            for (k; k < sus.row2; k++) {
+    for (var i = 0; i < sus.row1; i++) {
+        for (var j = 0; j < sus.col2; j++) {
+            var sum = 0;
+            for (var k = 0; k < sus.row2; k++) {
                 //var results = +document.getElementById("addTweets").value;
                 //result = mat1[i][k] * mat2[k][j]; /*id = "matrix" + matNum + "[" + i + "," + j + "]"*/
-                var mat1id = "matrix" + 1 + "[" + i + "," + k + "]";
-                console.log("mat 1 id is " + mat1id);
-                var mat2id = "matrix" + 2 + "[" + k + "," + j + "]";
-                console.log("mat 2 id is " + mat2id);
-                var elem1 = +document.getElementById(mat1id).value;
-                console.log("elem1 is " + elem1);
-                var elem2 = +document.getElementById(mat2id).value;
-                console.log("elem2 is " + elem2);
-                var result = elem1 * elem2;
-                console.log("result is " + result);
-                document.getElementById("result").innerHTML = "" + result;
-            }    
+                var mat1id = "matrix" + "1" + "[" + i + "," + k + "]";
+                //console.log("mat 1 id is " + mat1id);
+                var mat2id = "matrix" + "2" + "[" + k + "," + j + "]";
+                //console.log("mat 2 id is " + mat2id);
+                for (let input of inputs) {
+                    //console.log(mat1id, mat2id, input.id);
+                    if (mat1id == input.id) {
+                        var elem1 = parseInt(input.value);
+                    }
+                    if (mat2id == input.id) {
+                        var elem2 = parseInt(input.value);
+                    }
+                }
+                var product = elem1 * elem2;
+                sum += product;
+                //document.getElementById("result").innerHTML = "" + result;
+            }
+            console.log("result is " + sum);
         }
     }
 }
